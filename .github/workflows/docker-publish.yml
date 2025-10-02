@@ -20,13 +20,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Docker image
+      - name: Build and push Docker image
         run: |
-          IMAGE_NAME=ghcr.io/${{ github.repository | lower }}/recos-api:latest
+          # Convertir le repo en minuscules dans une variable shell
+          IMAGE_NAME="ghcr.io/$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')/recos-api:latest"
+          
+          # Construire l'image
           docker build -t $IMAGE_NAME .
           
-      - name: Push Docker image
-        run: |
-          IMAGE_NAME=ghcr.io/${{ github.repository | lower }}/recos-api:latest
+          # Pousser l'image
           docker push $IMAGE_NAME
-
