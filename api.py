@@ -3,7 +3,7 @@ import pandas as pd
 
 app = FastAPI()
 
-# Charger le CSV au démarrage
+# Charger le CSV au démarrage.
 df = pd.read_csv('recommandations.csv')
 
 # Convertir les colonnes de chaînes en listes
